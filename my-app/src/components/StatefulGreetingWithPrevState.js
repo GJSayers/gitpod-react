@@ -10,6 +10,7 @@ class StatefulGreetingWithPrevState extends React.Component {
         };
     }
 
+
     handleClick() {
         // always update the state using the setState method
         this.setState((prevState, prevProps) => {
