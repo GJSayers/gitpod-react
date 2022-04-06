@@ -1,7 +1,6 @@
 import React from "react";
 
-class StatefulGreetingWithPrevState extends React.Component{
-
+class StatefulGreetingWithPrevState extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -12,35 +11,34 @@ class StatefulGreetingWithPrevState extends React.Component{
     }
 
     handleClick() {
-        this.setState({
-            introduction: this.state.introduction === "Hello" ? "Goodbye!" : "Hello!",
-            buttonText: this.state.buttonText === "Exit" ? "Enter" : "Exit",
-        }, 
-        
-        () => {
-            // callback function is used
-            // if you have code that must run after the setState function is called
-            // make sure it goes in a callback function
-            // this is because setState is asynchronous
-        console.log("new state", this.state.introduction);
-        console.log("new state", this.state.buttonText);
-        }
-      );
-    }
+        // always update the state using the setState method
+        this.setState((prevState, prevProps) => {
+          console.log("Previous State:", prevState);
+          console.log("Previous Props:", prevProps);
+          return {
+            introduction:
+              prevState.introduction === "Hello!" ? "Goodbye!" : "Hello!",
+            buttonText: prevState.buttonText === "Exit" ? "Enter" : "Exit",
+          };
+        });
+      }
 
-    increment() {
-        this.setState({
-            count: this.state.count + 1
-        })
-        console.log(this.state.count)
-    }
+    increment() {	
+        this.setState((prevState, prevProps) => {	
+          console.log("Previous State:", prevState);	
+          console.log("Previous Props:", prevProps);	
+          return {	
+            count: prevState.count + 1,	
+          };	
+        });	
+      }
   
     incrementFive(){
-        this.increment()
-        this.increment()
-        this.increment()
-        this.increment()
-        this.increment()
+        this.increment();
+        this.increment();
+        this.increment();
+        this.increment();
+        this.increment();
     }
 
     render() {
